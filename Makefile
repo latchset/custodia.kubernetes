@@ -40,20 +40,9 @@ README: README.md
 	echo -e '.. WARNING: AUTO-GENERATED FILE. DO NOT EDIT.\n' > $@
 	pandoc --from=markdown --to=rst $< >> $@
 
-$(DOCS_DIR)/source/readme.rst: README
-	grep -ve '^|Build Status|' < $< | grep -v travis-ci.org > $@
-
-docs: $(DOCS_DIR)/source/readme.rst
-	$(MAKE) -C $(DOCS_DIR) html
-
 .PHONY: install egg_info run release
 install: clean_socket egg_info
 	$(PYTHON) setup.py install --root "$(PREFIX)"
-	install -d "$(PREFIX)/share/man/man7"
-	install -t "$(PREFIX)/share/man/man7" man/custodia.7
-	install -d "$(PREFIX)/share/doc/custodia/examples"
-	install -t "$(PREFIX)/share/doc/custodia" LICENSE README API.md
-	install -t "$(PREFIX)/share/doc/custodia/examples" custodia.conf
 
 egg_info:
 	$(PYTHON) setup.py egg_info
