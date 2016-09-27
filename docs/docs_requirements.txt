@@ -1,5 +1,0 @@
-# for RTFD
-docutils
-markdown
-docker-py
-python-etcd
